@@ -1,0 +1,950 @@
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+body {
+
+    font-family:
+        Inter,
+        Segoe UI,
+        Arial,
+        sans-serif;
+
+    background: #0b0e14;
+
+    color: #eef2f7;
+
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+.home-page {
+
+    min-height: 100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(55, 91, 130, 0.16),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(78, 61, 119, 0.13),
+            transparent 35%
+        ),
+
+        #0b0e14;
+
+}
+
+
+.home-container {
+
+    width: min(
+        1050px,
+        92%
+    );
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 60px 0;
+
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.home-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 55px;
+
+}
+
+
+.logo-symbol {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+
+    background: #182536;
+
+    border: 1px solid #31445b;
+
+    color: #79b9ed;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.25);
+
+}
+
+
+.home-logo h1 {
+
+    font-size: 24px;
+
+}
+
+
+.home-logo p {
+
+    color: #788596;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    max-width: 760px;
+
+}
+
+
+.hero-badge {
+
+    display: inline-block;
+
+    padding: 7px 10px;
+
+    border: 1px solid #293b50;
+
+    border-radius: 7px;
+
+    background: #121b26;
+
+    color: #769bc0;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.hero h2 {
+
+    font-size: clamp(
+        38px,
+        5vw,
+        65px
+    );
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+}
+
+
+.hero h2 span {
+
+    color: #75b5e9;
+
+}
+
+
+.hero p {
+
+    max-width: 650px;
+
+    color: #8994a4;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin-top: 20px;
+
+}
+
+
+/* =====================================================
+   MODE CARDS
+===================================================== */
+
+.mode-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 18px;
+
+    margin-top: 42px;
+
+}
+
+
+.mode-card {
+
+    display: grid;
+
+    grid-template-columns:
+        auto 1fr auto;
+
+    align-items: center;
+
+    gap: 16px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    background: #121720;
+
+    border: 1px solid #252e3b;
+
+    transition:
+        transform .2s,
+        border-color .2s,
+        background .2s;
+
+}
+
+
+.mode-card:hover {
+
+    transform: translateY(-4px);
+
+    background: #151c27;
+
+    border-color: #3b566f;
+
+}
+
+
+.mode-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #1a2b3e;
+
+    color: #76b5ea;
+
+    font-weight: 700;
+
+    font-size: 15px;
+
+}
+
+
+.mode-3d {
+
+    background: #29243c;
+
+    color: #b3a4e8;
+
+}
+
+
+.mode-card h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.mode-card p {
+
+    color: #778393;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+.mode-arrow {
+
+    color: #647184;
+
+    font-size: 23px;
+
+}
+
+
+/* =====================================================
+   FEATURES
+===================================================== */
+
+.features {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    margin-top: 30px;
+
+    color: #6f7a8a;
+
+    font-size: 11px;
+
+}
+
+
+.features div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+
+.features span {
+
+    color: #8d98a8;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.home-container footer {
+
+    margin-top: 50px;
+
+    color: #4e5969;
+
+    font-size: 10px;
+
+}
+
+
+/* =====================================================
+   WORKSPACE
+===================================================== */
+
+.workspace {
+
+    width: 100vw;
+
+    height: 100vh;
+
+    display: flex;
+
+    background: #0b0e14;
+
+}
+
+
+/* =====================================================
+   WORKSPACE SIDEBAR
+===================================================== */
+
+.workspace-sidebar {
+
+    width: 320px;
+
+    min-width: 320px;
+
+    padding: 20px;
+
+    overflow-y: auto;
+
+    background: #11151d;
+
+    border-right: 1px solid #252c37;
+
+}
+
+
+.workspace-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.workspace-brand a {
+
+    text-decoration: none;
+
+    color: #8995a5;
+
+    font-size: 24px;
+
+}
+
+
+.workspace-brand strong {
+
+    display: block;
+
+    font-size: 16px;
+
+}
+
+
+.workspace-brand span {
+
+    display: block;
+
+    color: #667282;
+
+    font-size: 10px;
+
+    margin-top: 3px;
+
+}
+
+
+/* =====================================================
+   CONTROL PANEL
+===================================================== */
+
+.control-panel {
+
+    background: #151a23;
+
+    border: 1px solid #252d39;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+}
+
+
+.control-title {
+
+    color: #aeb8c6;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 11px;
+
+}
+
+
+.equation-input {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px;
+
+    border-radius: 9px;
+
+    background: #0d1118;
+
+    border: 1px solid #2a3340;
+
+    margin-bottom: 20px;
+
+}
+
+
+.equation-input span {
+
+    color: #7298ba;
+
+    font-size: 12px;
+
+}
+
+
+.equation-input input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: #eef2f7;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   3D FUNCTION
+===================================================== */
+
+.function-3d {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.function-3d span {
+
+    width: 25px;
+
+    height: 25px;
+
+    min-width: 25px;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #202834;
+
+    color: #7d8999;
+
+    font-size: 10px;
+
+}
+
+
+.function-3d input {
+
+    width: 100%;
+
+    padding: 9px;
+
+    border-radius: 8px;
+
+    background: #0d1118;
+
+    border: 1px solid #29323f;
+
+    outline: none;
+
+    color: #eef2f7;
+
+}
+
+
+.range-heading {
+
+    margin-top: 22px;
+
+}
+
+
+/* =====================================================
+   AXIS
+===================================================== */
+
+.axis-label {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #8894a4;
+
+    font-size: 11px;
+
+}
+
+
+.axis-label > span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+}
+
+
+.axis-label div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+}
+
+
+.axis-label input {
+
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 8px;
+
+    border-radius: 7px;
+
+    background: #0d1118;
+
+    border: 1px solid #29323f;
+
+    outline: none;
+
+    color: #eef2f7;
+
+}
+
+
+.axis-label div span {
+
+    color: #566272;
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.primary-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 11px;
+
+    margin-top: 8px;
+
+    background: #28547d;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.primary-button:hover {
+
+    background: #33698f;
+
+}
+
+
+/* =====================================================
+   TIP
+===================================================== */
+
+.tip-box {
+
+    margin-top: 14px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    background: #131923;
+
+    border: 1px solid #252d39;
+
+    color: #7f8a9a;
+
+    font-size: 11px;
+
+}
+
+
+.tip-box strong {
+
+    display: block;
+
+    color: #b7c0cb;
+
+    margin-bottom: 9px;
+
+}
+
+
+.tip-box p {
+
+    margin-top: 6px;
+
+}
+
+
+.tip-box code {
+
+    display: block;
+
+    padding: 6px 8px;
+
+    background: #0d1118;
+
+    border-radius: 6px;
+
+    color: #8cbce3;
+
+    margin-top: 5px;
+
+}
+
+
+/* =====================================================
+   MAIN GRAPH
+===================================================== */
+
+.workspace-main {
+
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 20px;
+
+}
+
+
+.graph-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+
+}
+
+
+.graph-header h2 {
+
+    font-size: 19px;
+
+}
+
+
+.graph-header p {
+
+    color: #707b8a;
+
+    font-size: 11px;
+
+    margin-top: 4px;
+
+}
+
+
+.interactive-badge {
+
+    color: #78a98b;
+
+    background: #15221b;
+
+    border: 1px solid #294634;
+
+    padding: 7px 10px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+}
+
+
+/* =====================================================
+   GRAPH
+===================================================== */
+
+.graph-area {
+
+    flex: 1;
+
+    min-height: 0;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: #10141c;
+
+    border: 1px solid #252d39;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error-box {
+
+    padding: 11px 14px;
+
+    border-radius: 9px;
+
+    background: #2b181c;
+
+    border: 1px solid #633139;
+
+    color: #efabb2;
+
+    margin-bottom: 12px;
+
+    font-size: 11px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .mode-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .workspace {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        flex-direction: column;
+
+    }
+
+    .workspace-sidebar {
+
+        width: 100%;
+
+        min-width: 0;
+
+        border-right: none;
+
+        border-bottom: 1px solid #252c37;
+
+    }
+
+    .workspace-main {
+
+        height: 650px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .home-container {
+
+        width: 88%;
+
+    }
+
+    .hero h2 {
+
+        letter-spacing: -1px;
+
+    }
+
+}

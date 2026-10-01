@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GraphLab 3D</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="workspace">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="workspace-sidebar">
+
+
+        <div class="workspace-brand">
+
+            <a href="/">
+                ←
+            </a>
+
+            <div>
+
+                <strong>
+                    GraphLab
+                </strong>
+
+                <span>
+                    3D Mode
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <form
+            method="POST"
+            class="control-panel"
+        >
+
+
+            <div class="control-title">
+
+                Persamaan 3D
+
+            </div>
+
+
+            {% for i in range(5) %}
+
+            <div class="function-3d">
+
+                <span>
+                    {{ i + 1 }}
+                </span>
+
+                <input
+                    type="text"
+                    name="function_{{ i + 1 }}"
+                    value="{{ expressions[i] }}"
+                    placeholder="z = ..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+            {% endfor %}
+
+
+            <div class="control-title range-heading">
+
+                Rentang Sumbu
+
+            </div>
+
+
+            <!-- X -->
+
+            <label class="axis-label">
+
+                <span>X</span>
+
+                <div>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="x_min"
+                        value="{{ x_min }}"
+                    >
+
+                    <span>→</span>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="x_max"
+                        value="{{ x_max }}"
+                    >
+
+                </div>
+
+            </label>
+
+
+            <!-- Y -->
+
+            <label class="axis-label">
+
+                <span>Y</span>
+
+                <div>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="y_min"
+                        value="{{ y_min }}"
+                    >
+
+                    <span>→</span>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="y_max"
+                        value="{{ y_max }}"
+                    >
+
+                </div>
+
+            </label>
+
+
+            <!-- Z -->
+
+            <label class="axis-label">
+
+                <span>Z</span>
+
+                <div>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="z_min"
+                        value="{{ z_min }}"
+                    >
+
+                    <span>→</span>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="z_max"
+                        value="{{ z_max }}"
+                    >
+
+                </div>
+
+            </label>
+
+
+            <button
+                class="primary-button"
+                type="submit"
+            >
+
+                ▶ Gambarkan 3D
+
+            </button>
+
+
+        </form>
+
+
+        <!-- HELP -->
+
+        <div class="tip-box">
+
+            <strong>
+                Kontrol 3D
+            </strong>
+
+            <p>
+                🖱️ Drag → putar
+            </p>
+
+            <p>
+                🔍 Scroll → zoom
+            </p>
+
+            <p>
+                ✋ Shift + Drag → geser
+            </p>
+
+        </div>
+
+
+        <!-- EXAMPLES -->
+
+        <div class="tip-box">
+
+            <strong>
+                Contoh
+            </strong>
+
+            <code>
+                z = x^2 + y^2
+            </code>
+
+            <code>
+                z = sin(x) + cos(y)
+            </code>
+
+            <code>
+                z = sqrt(36-x^2-y^2)
+            </code>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- MAIN GRAPH -->
+
+    <main class="workspace-main">
+
+
+        <header class="graph-header">
+
+            <div>
+
+                <h2>
+                    Grafik 3D
+                </h2>
+
+                <p>
+                    Interactive three-dimensional visualization
+                </p>
+
+            </div>
+
+
+            <div class="interactive-badge">
+
+                ● Interactive
+
+            </div>
+
+        </header>
+
+
+        {% if errors %}
+
+        <div class="error-box">
+
+            {% for error in errors %}
+
+            <div>
+                ⚠️ {{ error }}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+
+        <div
+            id="graph3d"
+            class="graph-area"
+        ></div>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+    const surfaces =
+        {{ surfaces | tojson }};
+
+
+    // =====================================================
+    // TRACE
+    // =====================================================
+
+    const traces =
+        surfaces.map(
+            surface => ({
+
+                type: "surface",
+
+                x: surface.x,
+
+                y: surface.y,
+
+                z: surface.z,
+
+                name: surface.name,
+
+                opacity: 0.88,
+
+                showscale: false,
+
+                hovertemplate:
+                    "X: %{x:.3f}<br>" +
+                    "Y: %{y:.3f}<br>" +
+                    "Z: %{z:.3f}" +
+                    "<extra></extra>"
+
+            })
+        );
+
+
+    // =====================================================
+    // LAYOUT
+    // =====================================================
+
+    const layout = {
+
+        paper_bgcolor: "#10141c",
+
+        plot_bgcolor: "#10141c",
+
+        margin: {
+
+            l: 0,
+            r: 0,
+            t: 0,
+            b: 0
+
+        },
+
+
+        scene: {
+
+
+            // =============================================
+            // X
+            // =============================================
+
+            xaxis: {
+
+                title: "X",
+
+                range: [
+                    {{ x_min }},
+                    {{ x_max }}
+                ],
+
+                autorange: false,
+
+                showgrid: true,
+
+                zeroline: true,
+
+                showbackground: true,
+
+                backgroundcolor: "#10141c",
+
+                gridcolor: "#29313e",
+
+                zerolinecolor: "#687486",
+
+                color: "#aeb8c5"
+
+            },
+
+
+            // =============================================
+            // Y
+            // =============================================
+
+            yaxis: {
+
+                title: "Y",
+
+                range: [
+                    {{ y_min }},
+                    {{ y_max }}
+                ],
+
+                autorange: false,
+
+                showgrid: true,
+
+                zeroline: true,
+
+                showbackground: true,
+
+                backgroundcolor: "#10141c",
+
+                gridcolor: "#29313e",
+
+                zerolinecolor: "#687486",
+
+                color: "#aeb8c5"
+
+            },
+
+
+            // =============================================
+            // Z
+            // =============================================
+
+            zaxis: {
+
+                title: "Z",
+
+                range: [
+                    {{ z_min }},
+                    {{ z_max }}
+                ],
+
+                autorange: false,
+
+                showgrid: true,
+
+                zeroline: true,
+
+                showbackground: true,
+
+                backgroundcolor: "#10141c",
+
+                gridcolor: "#29313e",
+
+                zerolinecolor: "#687486",
+
+                color: "#aeb8c5"
+
+            },
+
+
+            // =============================================
+            // CAMERA
+            // =============================================
+
+            camera: {
+
+                eye: {
+
+                    x: 1.7,
+
+                    y: 1.7,
+
+                    z: 1.4
+
+                }
+
+            },
+
+
+            aspectmode: "cube"
+
+        }
+
+    };
+
+
+    // =====================================================
+    // CONFIG
+    // =====================================================
+
+    const config = {
+
+        responsive: true,
+
+        scrollZoom: true,
+
+        displaylogo: false,
+
+        displayModeBar: true
+
+    };
+
+
+    // =====================================================
+    // DRAW
+    // =====================================================
+
+    Plotly.newPlot(
+
+        "graph3d",
+
+        traces,
+
+        layout,
+
+        config
+
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

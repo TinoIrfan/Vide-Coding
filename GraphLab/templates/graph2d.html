@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GraphLab 2D</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="workspace">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="workspace-sidebar">
+
+
+        <div class="workspace-brand">
+
+            <a href="/">
+                ←
+            </a>
+
+            <div>
+
+                <strong>
+                    GraphLab
+                </strong>
+
+                <span>
+                    2D Mode
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <form
+            method="POST"
+            class="control-panel"
+        >
+
+
+            <div class="control-title">
+                Persamaan
+            </div>
+
+
+            <div class="equation-input">
+
+                <span>
+                    y =
+                </span>
+
+                <input
+                    type="text"
+                    name="expression"
+                    value="{{ expression }}"
+                    placeholder="x^2 + 2x + 1"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="control-title">
+                Rentang X
+            </div>
+
+
+            <div class="axis-range">
+
+                <input
+                    type="number"
+                    step="any"
+                    name="x_min"
+                    value="{{ x_min }}"
+                >
+
+                <span>→</span>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="x_max"
+                    value="{{ x_max }}"
+                >
+
+            </div>
+
+
+            <button
+                class="primary-button"
+                type="submit"
+            >
+
+                ▶ Gambarkan Grafik
+
+            </button>
+
+
+        </form>
+
+
+        <div class="tip-box">
+
+            <strong>Contoh</strong>
+
+            <code>
+                x^2
+            </code>
+
+            <code>
+                sin(x)
+            </code>
+
+            <code>
+                x^3 - 2x
+            </code>
+
+            <code>
+                sqrt(x)
+            </code>
+
+        </div>
+
+
+        <div class="tip-box">
+
+            <strong>Kontrol</strong>
+
+            <p>
+                🖱️ Drag untuk menggeser
+            </p>
+
+            <p>
+                🔍 Scroll untuk zoom
+            </p>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- GRAPH -->
+
+    <main class="workspace-main">
+
+
+        <header class="graph-header">
+
+            <div>
+
+                <h2>
+                    Grafik 2D
+                </h2>
+
+                <p>
+                    {{ expression if expression else "Belum ada persamaan" }}
+                </p>
+
+            </div>
+
+
+            <div class="interactive-badge">
+
+                ● Interactive
+
+            </div>
+
+        </header>
+
+
+        {% if error %}
+
+        <div class="error-box">
+
+            ⚠️ {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <div
+            id="graph2d"
+            class="graph-area"
+        ></div>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+    const graphData =
+        {{ graph | tojson }};
+
+
+    const traces = [];
+
+
+    if (graphData) {
+
+        traces.push({
+
+            x: graphData.x,
+
+            y: graphData.y,
+
+            type: "scatter",
+
+            mode: "lines",
+
+            name: graphData.name,
+
+            line: {
+
+                width: 3
+
+            }
+
+        });
+
+    }
+
+
+    const layout = {
+
+        paper_bgcolor: "#10141c",
+
+        plot_bgcolor: "#10141c",
+
+        margin: {
+            l: 60,
+            r: 25,
+            t: 20,
+            b: 50
+        },
+
+        xaxis: {
+
+            title: "X",
+
+            range: [
+                {{ x_min }},
+                {{ x_max }}
+            ],
+
+            autorange: false,
+
+            showgrid: true,
+
+            zeroline: true,
+
+            gridcolor: "#252d39",
+
+            zerolinecolor: "#586474",
+
+            color: "#aeb8c5"
+
+        },
+
+        yaxis: {
+
+            title: "Y",
+
+            gridcolor: "#252d39",
+
+            zerolinecolor: "#586474",
+
+            color: "#aeb8c5"
+
+        },
+
+        hovermode: "x unified",
+
+        showlegend: true,
+
+        legend: {
+
+            bgcolor: "rgba(0,0,0,0)",
+
+            font: {
+
+                color: "#b7c0cd"
+
+            }
+
+        }
+
+    };
+
+
+    const config = {
+
+        responsive: true,
+
+        scrollZoom: true,
+
+        displaylogo: false
+
+    };
+
+
+    Plotly.newPlot(
+        "graph2d",
+        traces,
+        layout,
+        config
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
