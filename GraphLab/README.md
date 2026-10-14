@@ -16,5 +16,3 @@ Run:
 `python app.py`
 
 Buka `http://127.0.0.1:5000`.
-
-Catatan: versi ini membuat render 3D dari Python/Matplotlib; rotasi 3D langsung dengan mouse belum dibuat karena proyek tetap tanpa JavaScript.
